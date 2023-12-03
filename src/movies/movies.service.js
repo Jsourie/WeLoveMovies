@@ -5,15 +5,32 @@ function list() {
 }
 
 function listMovies(isShowing) {
+  const query = knex("movies").select(
+    "movies.movie_id",
+    "movies.title",
+    "movies.runtime_in_minutes",
+    "movies.rating",
+    "movies.description",
+    "movies.image_url"
+  );
+
   if (isShowing) {
-    return knex("movies")
+    query
       .join("movies_theaters as mt", "movies.movie_id", "mt.movie_id")
       .where({ "mt.is_showing": true })
-      .groupBy("movies.movie_id");
-  } else {
-    return knex("movies").select("*");
+      .groupBy(
+        "movies.movie_id",
+        "movies.title",
+        "movies.runtime_in_minutes",
+        "movies.rating",
+        "movies.description",
+        "movies.image_url"
+      );
   }
+
+  return query;
 }
+
 
 function read(movieId) {
   return knex("movies").select("*").where({ movie_id: movieId }).first();

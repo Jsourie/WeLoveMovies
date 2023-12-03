@@ -39,7 +39,6 @@ async function listReviews(req, res, next) {
 }
 
 
-
 function movieExists(req, res, next) {
   movieService
     .read(req.params.movieId)
