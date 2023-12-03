@@ -13,20 +13,26 @@ async function reviewExists(req, res, next) {
 }
 
 async function update(req, res, next) {
-  try {
-    const updatedReview = {
-      ...res.locals.review,
-      ...req.body.data,
-      review_id: res.locals.review.review_id,
-    };
+  const updatedReview = {
+    ...res.locals.review,
+    ...req.body.data,
+    review_id: res.locals.review.review_id,
+  };
 
-    const data = await reviewService.update(updatedReview);
+  const updatedData = await reviewService.update(updatedReview);
 
-    res.json({ data });
-  } catch (error) {
-    next(error);
-  }
+    const updatedReviewData = await reviewService.read(updatedReview.review_id);
+
+  const critic = await reviewService.getCritic(updatedReview.critic_id);
+  const responseData = {
+    ...updatedReviewData, 
+    critic,
+  };
+
+  res.json({ data: responseData });
 }
+
+ 
 
 async function destroy(req, res, next) {
   try {
