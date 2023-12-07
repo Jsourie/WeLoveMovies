@@ -8,7 +8,9 @@ exports.up = function (knex) {
       table.timestamps(true, true); // Adds created_at and updated_at columns
     });
   }
-
+console.log("return succeeded")
   exports.down = function (knex) {
     return knex.schema.dropTable("critics");
   };
+
+  console.log("tabledropsucceded")

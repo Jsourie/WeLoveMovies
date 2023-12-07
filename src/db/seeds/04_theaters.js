@@ -17,7 +17,7 @@ exports.seed = function (knex) {
       zip: "97212",
     },
     {
-      name: "Regal Tigard",
+      name: "Regal Sourie",
       address_line_1: "11626 SW Pacific Hwy",
       address_line_2: "",
       city: "Tigard",
